@@ -1,11 +1,365 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой сайт</title>
+    <title>Красота в простоте</title>
+    <style>
+        /* Сброс и базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0b0f1a 0%, #1a2535 100%);
+            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Эффект звездного неба (мелкие точки) */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 15% 30%, rgba(255, 255, 255, 0.8) 1px, transparent 0),
+                radial-gradient(1px 1px at 72% 45%, rgba(255, 255, 255, 0.7) 1px, transparent 0),
+                radial-gradient(2px 2px at 10% 80%, rgba(255, 240, 200, 0.6) 1px, transparent 0),
+                radial-gradient(1px 1px at 90% 15%, rgba(255, 255, 255, 0.9) 1px, transparent 0),
+                radial-gradient(2px 2px at 40% 60%, rgba(210, 230, 255, 0.8) 1px, transparent 0),
+                radial-gradient(1px 1px at 55% 88%, rgba(255, 255, 255, 0.7) 1px, transparent 0),
+                radial-gradient(2px 2px at 85% 70%, rgba(230, 240, 255, 0.8) 1px, transparent 0),
+                radial-gradient(1px 1px at 25% 20%, #fff 1px, transparent 0),
+                radial-gradient(1px 1px at 95% 92%, #fff 1px, transparent 0);
+            background-size: 200px 200px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Главная карточка — элегантное стекло */
+        .glass-card {
+            position: relative;
+            max-width: 680px;
+            width: 100%;
+            background: rgba(20, 30, 40, 0.4);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border-radius: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 30px 50px -20px rgba(0, 0, 0, 0.6),
+                inset 0 1px 2px rgba(255, 255, 255, 0.1);
+            padding: 3rem 2.5rem;
+            color: #edeff2;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 40px 60px -15px rgba(0, 0, 0, 0.8), inset 0 1px 3px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Декоративное сияние по краям */
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 140%;
+            height: 160%;
+            background: radial-gradient(circle at 30% 40%, rgba(100, 180, 255, 0.15), transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Тонкая линия-акцент сверху */
+        .card-glow-line {
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(210, 230, 255, 0.6), rgba(255, 255, 255, 0.8), rgba(210, 230, 255, 0.6), transparent);
+            filter: blur(0.5px);
+            border-radius: 100%;
+        }
+
+        /* Типографика */
+        h1 {
+            font-size: clamp(2.6rem, 8vw, 4rem);
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 40, 80, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h1 span {
+            font-weight: 500;
+            color: #c7e2ff;
+            text-shadow: 0 0 8px rgba(120, 180, 255, 0.7);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 2.5rem;
+            opacity: 0.8;
+            border-left: 3px solid rgba(200, 225, 255, 0.5);
+            padding-left: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Разделительная линия */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 2.2rem;
+            color: rgba(220, 235, 255, 0.4);
+        }
+
+        .divider-line {
+            height: 1px;
+            flex: 1;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        .divider-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 6px #aad0ff);
+        }
+
+        /* Сетка для "красивых деталей" */
+        .beauty-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 2.2rem 0 2rem;
+        }
+
+        .beauty-item {
+            background: rgba(45, 60, 75, 0.35);
+            border-radius: 100px;
+            padding: 0.6rem 1.6rem 0.6rem 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+        }
+
+        .beauty-item:hover {
+            background: rgba(65, 85, 105, 0.5);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(0, 20, 40, 0.5);
+        }
+
+        .beauty-icon {
+            font-size: 1.6rem;
+            filter: drop-shadow(0 0 5px #9ac0ff);
+        }
+
+        /* Цитата */
+        .quote {
+            position: relative;
+            margin: 2.5rem 0 2rem;
+            padding: 1.8rem 1.8rem 1.8rem 2.8rem;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1.4rem;
+            font-weight: 300;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px black;
+            box-shadow: inset 0 0 20px rgba(0, 20, 40, 0.5);
+        }
+
+        .quote::before {
+            content: '“';
+            position: absolute;
+            left: 0.8rem;
+            top: -0.2rem;
+            font-size: 5rem;
+            font-family: serif;
+            color: rgba(220, 240, 255, 0.25);
+            text-shadow: 0 0 12px #b0d5ff;
+        }
+
+        .quote-author {
+            display: block;
+            margin-top: 0.8rem;
+            text-align: right;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        /* "Красивая кнопка" */
+        .elegant-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background: rgba(20, 35, 50, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 60px;
+            padding: 0.9rem 2.5rem;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #e5ecf5;
+            text-decoration: none;
+            backdrop-filter: blur(6px);
+            cursor: default; /* просто красота, не функционал */
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px -10px rgba(0, 10, 30, 0.5);
+            width: fit-content;
+        }
+
+        .elegant-button:hover {
+            background: rgba(45, 70, 95, 0.5);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 14px 28px -8px rgba(0, 40, 80, 0.7);
+        }
+
+        .button-icon {
+            font-size: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .elegant-button:hover .button-icon {
+            transform: translateX(4px) rotate(2deg);
+        }
+
+        /* Абсолютно крошечные живые детали */
+        .floating-dot {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(140, 200, 255, 0.15), transparent 80%);
+            bottom: -30px;
+            right: -20px;
+            z-index: -1;
+            filter: blur(20px);
+        }
+
+        .floating-dot-2 {
+            top: -20px;
+            left: -20px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 70% 20%, rgba(180, 150, 255, 0.12), transparent 80%);
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: -1;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 500px) {
+            .glass-card {
+                padding: 2rem 1.5rem;
+                border-radius: 36px;
+            }
+            h1 {
+                font-size: 2.6rem;
+            }
+            .quote {
+                font-size: 1.2rem;
+                padding: 1.5rem 1rem 1.5rem 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Мой сайт</h1>
+
+    <div class="glass-card">
+        <!-- верхний акцент (тонкая светящаяся полоска) -->
+        <div class="card-glow-line"></div>
+
+        <!-- мягкие размытые пятна (воздух) -->
+        <div class="floating-dot"></div>
+        <div class="floating-dot-2"></div>
+
+        <!-- Основной контент -->
+        <h1>
+            <span>✧</span> просто <span>красиво</span> ✧
+        </h1>
+        <div class="subtitle">
+            эстетика кода и тишина
+        </div>
+
+        <!-- разделитель с маленьким цветком -->
+        <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✽</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- набор красивых слов (как драгоценности) -->
+        <div class="beauty-grid">
+            <div class="beauty-item">
+                <span class="beauty-icon">🌙</span> лунный свет
+            </div>
+            <div class="beauty-item">
+                <span class="beauty-icon">🌊</span> оттенок моря
+            </div>
+            <div class="beauty-item">
+                <span class="beauty-icon">❄️</span> свежесть
+            </div>
+            <div class="beauty-item">
+                <span class="beauty-icon">✨</span> мерцание
+            </div>
+            <div class="beauty-item">
+                <span class="beauty-icon">🍃</span> ветер
+            </div>
+        </div>
+
+        <!-- вдохновляющая цитата -->
+        <div class="quote">
+            В каждой мимолётности вижу я миры,<br>в каждой капле — отражение бесконечности.
+            <span class="quote-author">— из заметок мечтателя</span>
+        </div>
+
+        <!-- простая кнопка без функции, просто для завершения образа -->
+        <div class="elegant-button">
+            <span>насладиться моментом</span>
+            <span class="button-icon">→</span>
+        </div>
+
+        <!-- маленький намёк на гармонию внизу (дополнительный текст) -->
+        <div style="margin-top: 2.2rem; font-size: 0.75rem; opacity: 0.4; text-align: center; letter-spacing: 1px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 1rem;">
+            ✦  гармония света и тени  ✦
+        </div>
+    </div>
+
+    <!-- дополнительный микро-акцент за пределами карточки (падающая "звезда") не мешает -->
+    <div style="position: absolute; top: 15%; left: 8%; width: 4px; height: 4px; background: white; border-radius: 50%; box-shadow: 0 0 12px #b6dcff; opacity: 0.5;"></div>
+    <div style="position: absolute; bottom: 12%; right: 12%; width: 6px; height: 6px; background: #fcf3d7; border-radius: 50%; filter: blur(1px); box-shadow: 0 0 20px ivory;"></div>
 </body>
 </html>
